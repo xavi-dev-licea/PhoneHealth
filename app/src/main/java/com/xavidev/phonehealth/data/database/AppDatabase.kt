@@ -4,10 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.xavidev.phonehealth.data.dao.ChargeDao
-import com.xavidev.phonehealth.data.dao.NotificationDao
-import com.xavidev.phonehealth.data.dao.RebootDao
-import com.xavidev.phonehealth.data.dao.ScreenLockDao
+import com.xavidev.phonehealth.data.dao.*
 import com.xavidev.phonehealth.data.entities.Charge
 import com.xavidev.phonehealth.data.entities.Notification
 import com.xavidev.phonehealth.data.entities.Reboot
@@ -25,10 +22,11 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun screenLockDao(): ScreenLockDao
     abstract fun rebootDao(): RebootDao
     abstract fun chargeDao(): ChargeDao
+    abstract fun userDao(): UserDao
+    abstract fun deviceDao(): DeviceDao
 
     companion object {
         private const val DATABASE_NAME = "health_db"
-
         private var INSTANCE: AppDatabase? = null
 
         fun getInstance(context: Context): AppDatabase {
@@ -39,7 +37,6 @@ abstract class AppDatabase : RoomDatabase() {
                 )
                     .build()
             }
-
             return INSTANCE as AppDatabase
         }
     }
