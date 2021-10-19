@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentActivity
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 private const val DATE_PATTERN = "dd-MM-yyyy"
 
 fun SimpleDateFormat.formatWithDatePattern(date: Calendar): String = format(date.time)

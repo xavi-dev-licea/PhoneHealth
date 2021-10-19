@@ -1,12 +1,14 @@
 package com.xavidev.phonehealth.ui.activities.mainMenu
 
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.xavidev.phonehealth.R
 import com.xavidev.phonehealth.databinding.ActivityMainBinding
-import com.xavidev.phonehealth.utils.Extensions.toast
+import com.xavidev.phonehealth.ui.fragments.battery.BatteryFragment
+import com.xavidev.phonehealth.ui.fragments.notifications.NotificationsFragment
+import com.xavidev.phonehealth.ui.fragments.reboot.RebootFragment
+import com.xavidev.phonehealth.utils.Constants
+import com.xavidev.phonehealth.utils.addFragment
 
 class MainMenu : AppCompatActivity() {
 
@@ -21,18 +23,44 @@ class MainMenu : AppCompatActivity() {
     }
 
     private fun setupNavigationListener() {
+        addFragment(
+            BatteryFragment::class.java,
+            Constants.BATTERY_FRAGMENT,
+            binding.containerFrame,
+            true,
+            null
+        )
+
         binding.bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.menu_home -> {
-                    toast("Home")
+                    addFragment(
+                        BatteryFragment::class.java,
+                        Constants.BATTERY_FRAGMENT,
+                        binding.containerFrame,
+                        false,
+                        null
+                    )
                     true
                 }
                 R.id.menu_statistics -> {
-                    toast("Statistics")
+                    addFragment(
+                        NotificationsFragment::class.java,
+                        Constants.NOTIFICATIONS_FRAGMENT,
+                        binding.containerFrame,
+                        false,
+                        null
+                    )
                     true
                 }
                 R.id.menu_profile -> {
-                    toast("Profile")
+                    addFragment(
+                        RebootFragment::class.java,
+                        Constants.REBOOT_FRAGMENT,
+                        binding.containerFrame,
+                        false,
+                        null
+                    )
                     true
                 }
                 else -> false
